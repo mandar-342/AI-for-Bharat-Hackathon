@@ -1,0 +1,1118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BhashaVerse — Wireframe v2</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@400;500;600;700&family=Kalam:wght@300;400;700&family=Patrick+Hand&display=swap');
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  background: #f5f0e8;
+  background-image:
+    linear-gradient(rgba(0,0,0,0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0,0,0,0.03) 1px, transparent 1px);
+  background-size: 28px 28px;
+  font-family: 'Kalam', cursive;
+  min-height: 100vh;
+  padding: 40px;
+  color: #2a2a2a;
+}
+
+/* PAPER TEXTURE */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* PAGE HEADER */
+.page-top {
+  position: relative;
+  margin-bottom: 50px;
+  padding-bottom: 20px;
+  border-bottom: 2.5px solid #2a2a2a;
+}
+.page-top::after {
+  content: '';
+  position: absolute;
+  bottom: -5px;
+  left: 0;
+  right: 30%;
+  height: 1px;
+  background: #2a2a2a;
+  opacity: 0.3;
+}
+.page-title {
+  font-family: 'Caveat', cursive;
+  font-size: 42px;
+  font-weight: 700;
+  color: #1a1a1a;
+  letter-spacing: -0.5px;
+  line-height: 1;
+  margin-bottom: 6px;
+}
+.page-title span {
+  text-decoration: underline;
+  text-decoration-style: wavy;
+  text-underline-offset: 4px;
+  text-decoration-color: #e74c3c;
+}
+.page-meta {
+  display: flex;
+  gap: 30px;
+  font-size: 15px;
+  color: #555;
+  margin-top: 10px;
+}
+.page-meta span::before { content: '— '; }
+.hand-note-top {
+  position: absolute;
+  top: 0;
+  right: 0;
+  font-family: 'Caveat', cursive;
+  font-size: 14px;
+  color: #888;
+  text-align: right;
+  line-height: 1.9;
+  transform: rotate(1.5deg);
+}
+.red-circle {
+  display: inline-block;
+  border: 2px solid #e74c3c;
+  border-radius: 50%;
+  padding: 2px 8px;
+  color: #e74c3c;
+}
+
+/* SCREENS CONTAINER */
+.screens-wrapper {
+  display: flex;
+  gap: 30px;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  margin-bottom: 60px;
+  position: relative;
+}
+
+/* EACH SCREEN BLOCK */
+.screen-block {
+  position: relative;
+}
+.screen-block:nth-child(2) { margin-top: 20px; }
+.screen-block:nth-child(3) { margin-top: -10px; }
+.screen-block:nth-child(4) { margin-top: 15px; }
+.screen-block:nth-child(5) { margin-top: 5px; }
+
+/* PHONE OUTLINE — HAND DRAWN STYLE */
+.phone {
+  width: 200px;
+  background: #fff;
+  border: 3px solid #1a1a1a;
+  border-radius: 28px 30px 26px 28px;
+  padding: 8px;
+  position: relative;
+  box-shadow: 4px 5px 0px #1a1a1a;
+}
+/* Slightly imperfect corners */
+.phone::before {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  border-radius: 28px 30px 26px 28px;
+  border: 1px solid rgba(0,0,0,0.08);
+}
+.phone-inner {
+  border: 2px solid #1a1a1a;
+  border-radius: 22px 24px 20px 22px;
+  overflow: hidden;
+  min-height: 380px;
+  background: white;
+  position: relative;
+}
+
+/* NOTCH */
+.notch {
+  width: 60px;
+  height: 16px;
+  background: #1a1a1a;
+  border-radius: 0 0 12px 12px;
+  margin: 0 auto;
+  display: block;
+  position: relative;
+  z-index: 1;
+}
+
+/* STATUS BAR */
+.sbar {
+  display: flex;
+  justify-content: space-between;
+  padding: 3px 12px;
+  font-size: 7px;
+  font-family: monospace;
+  color: #333;
+  background: #f9f9f9;
+  border-bottom: 1px solid #eee;
+}
+
+/* SCREEN HEADER */
+.s-hdr {
+  padding: 10px 12px 8px;
+  border-bottom: 2px solid #1a1a1a;
+  background: #1a1a1a;
+  color: white;
+}
+.s-hdr-title { font-family: 'Kalam', cursive; font-size: 12px; font-weight: 700; }
+.s-hdr-sub { font-size: 9px; opacity: 0.6; margin-top: 1px; font-family: 'Patrick Hand', cursive; }
+
+/* SCREEN CONTENT AREAS */
+.s-body { padding: 10px; }
+
+/* HAND-DRAWN BOXES */
+.hbox {
+  border: 2px solid #333;
+  border-radius: 4px 6px 4px 5px;
+  padding: 8px 10px;
+  margin-bottom: 8px;
+  background: white;
+  position: relative;
+}
+.hbox-fill-dark { background: #1a1a1a; color: white; }
+.hbox-fill-light { background: #f5f0e8; }
+.hbox-fill-green { background: #e8f5e0; }
+.hbox-fill-red { background: #fde8e8; }
+
+/* TEXT STYLES IN SCREENS */
+.sc-title { font-family: 'Caveat', cursive; font-size: 13px; font-weight: 700; }
+.sc-sub { font-family: 'Patrick Hand', cursive; font-size: 9.5px; color: #555; margin-top: 2px; }
+.sc-label { font-family: 'Patrick Hand', cursive; font-size: 8.5px; color: #888; }
+
+/* BUTTON SHAPES */
+.btn-sketch {
+  border: 2px solid #1a1a1a;
+  border-radius: 6px 8px 7px 6px;
+  padding: 7px 10px;
+  text-align: center;
+  font-family: 'Kalam', cursive;
+  font-size: 11px;
+  font-weight: 700;
+  margin-bottom: 6px;
+  cursor: pointer;
+}
+.btn-dark { background: #1a1a1a; color: white; }
+.btn-outline { background: white; }
+
+/* BIG MIC BUTTON */
+.mic-btn {
+  width: 70px; height: 70px;
+  border-radius: 50%;
+  border: 3px solid #1a1a1a;
+  background: #1a1a1a;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 28px;
+  margin: 12px auto;
+  position: relative;
+  box-shadow: 3px 3px 0 #555;
+}
+.mic-btn::after {
+  content: '';
+  position: absolute;
+  inset: -8px;
+  border-radius: 50%;
+  border: 1.5px dashed #aaa;
+}
+
+/* LANG GRID */
+.lang-g {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 5px;
+  margin: 8px 0;
+}
+.lang-pill {
+  border: 2px solid #333;
+  border-radius: 6px 8px 5px 7px;
+  padding: 5px 4px;
+  text-align: center;
+  font-family: 'Patrick Hand', cursive;
+  font-size: 9px;
+}
+.lang-pill.active { background: #1a1a1a; color: white; border-color: #1a1a1a; }
+.lang-main { font-size: 12px; font-family: 'Kalam', cursive; font-weight: 700; display: block; }
+
+/* FEATURE GRID */
+.feat-g {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 5px;
+  margin: 8px 0;
+}
+.feat-c {
+  border: 2px solid #333;
+  border-radius: 6px;
+  padding: 7px 6px;
+  background: #fafafa;
+}
+.feat-icon { font-size: 16px; }
+.feat-t { font-family: 'Kalam', cursive; font-size: 9px; font-weight: 700; margin-top: 2px; }
+.feat-s { font-family: 'Patrick Hand', cursive; font-size: 7.5px; color: #777; }
+.offline-t {
+  display: inline-block;
+  border: 1px solid #888;
+  border-radius: 4px;
+  padding: 0px 4px;
+  font-size: 7px;
+  color: #555;
+  margin-top: 2px;
+  font-family: 'Patrick Hand', cursive;
+}
+
+/* CHAT BUBBLES */
+.bubble-u {
+  background: #1a1a1a;
+  color: white;
+  border-radius: 10px 10px 2px 10px;
+  padding: 7px 9px;
+  font-family: 'Patrick Hand', cursive;
+  font-size: 9px;
+  line-height: 1.5;
+  margin-bottom: 7px;
+}
+.bubble-ai {
+  background: #f5f0e8;
+  border: 2px solid #ccc;
+  border-radius: 10px 10px 10px 2px;
+  padding: 7px 9px;
+  font-family: 'Patrick Hand', cursive;
+  font-size: 9px;
+  line-height: 1.5;
+  margin-bottom: 7px;
+  border-left: 3px solid #2ecc71;
+}
+.ai-by { font-size: 7px; color: #888; margin-bottom: 3px; font-family: 'Kalam', cursive; }
+
+/* AUDIO BAR */
+.audio-b {
+  background: #1a1a1a;
+  border-radius: 8px;
+  padding: 6px 8px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin: 6px 0;
+}
+.audio-icon { font-size: 12px; color: #f1c40f; }
+.wave-s { display: flex; gap: 2px; align-items: center; }
+.w { width: 2px; background: #4CAF50; border-radius: 1px; }
+.audio-lbl { font-size: 7px; color: rgba(255,255,255,0.5); margin-left: auto; font-family: monospace; }
+
+/* CAMERA BOX */
+.cam-box {
+  background: #1a1a1a;
+  border-radius: 8px;
+  height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  margin-bottom: 8px;
+}
+.cam-frame {
+  width: 60px; height: 60px;
+  border: 2px solid #f1c40f;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+}
+.cam-lbl { position: absolute; bottom: 5px; font-size: 7px; color: rgba(255,255,255,0.4); font-family: 'Patrick Hand', cursive; }
+
+/* RESULT BOX */
+.result-b {
+  border: 2px solid #e74c3c;
+  border-radius: 6px;
+  padding: 7px;
+  margin-bottom: 6px;
+}
+.disease-n { font-family: 'Kalam', cursive; font-size: 10px; font-weight: 700; color: #c0392b; }
+.conf-row { display: flex; align-items: center; gap: 5px; margin: 4px 0; }
+.conf-tr { flex: 1; height: 5px; background: #ddd; border-radius: 3px; border: 1px solid #bbb; }
+.conf-fill { height: 100%; background: #27ae60; border-radius: 3px; }
+.conf-pct { font-size: 8px; color: #555; font-family: monospace; }
+.remedy-b {
+  background: #e8f5e0;
+  border: 1px solid #aaa;
+  border-radius: 4px;
+  padding: 5px 7px;
+  font-size: 8.5px;
+  color: #333;
+  font-family: 'Patrick Hand', cursive;
+  line-height: 1.5;
+}
+
+/* MANDI ROWS */
+.mandi-row {
+  display: flex;
+  align-items: center;
+  padding: 6px 4px;
+  border-bottom: 1px dashed #ccc;
+  gap: 6px;
+}
+.m-icon { font-size: 14px; }
+.m-name { font-family: 'Kalam', cursive; font-size: 9px; font-weight: 700; flex: 1; }
+.m-name span { display: block; font-size: 8px; color: #888; font-family: 'Patrick Hand', cursive; }
+.m-price { font-family: 'Kalam', cursive; font-size: 12px; font-weight: 700; text-align: right; }
+.m-change { font-size: 8px; font-family: 'Patrick Hand', cursive; }
+.up { color: #27ae60; }
+.dn { color: #e74c3c; }
+
+/* NAV */
+.nav-b {
+  display: flex;
+  justify-content: space-around;
+  padding: 6px 4px 4px;
+  border-top: 2px solid #1a1a1a;
+  background: #fafafa;
+}
+.nav-i {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1px;
+}
+.nav-i .ni { font-size: 14px; }
+.nav-i .nl { font-size: 6.5px; color: #888; font-family: 'Patrick Hand', cursive; }
+.nav-i.act .nl { color: #1a1a1a; font-weight: 700; }
+.nav-dot { width: 4px; height: 4px; background: #1a1a1a; border-radius: 50%; margin: 1px auto 0; }
+
+/* INPUT BAR */
+.inp-bar {
+  display: flex;
+  align-items: center;
+  border: 2px solid #333;
+  border-radius: 20px;
+  padding: 5px 10px;
+  gap: 6px;
+  margin-top: 6px;
+  background: white;
+}
+.inp-ph { font-family: 'Patrick Hand', cursive; font-size: 8.5px; color: #aaa; flex: 1; }
+
+/* SCREEN LABELS */
+.s-label-wrap {
+  text-align: center;
+  margin-top: 12px;
+}
+.s-label {
+  font-family: 'Caveat', cursive;
+  font-size: 16px;
+  font-weight: 700;
+  color: #1a1a1a;
+}
+.s-label-sub {
+  font-family: 'Patrick Hand', cursive;
+  font-size: 12px;
+  color: #888;
+}
+
+/* ANNOTATIONS / ARROWS */
+.annotation {
+  position: absolute;
+  font-family: 'Caveat', cursive;
+  font-size: 12px;
+  color: #e74c3c;
+  line-height: 1.4;
+  pointer-events: none;
+}
+.ann-arrow {
+  display: block;
+  font-size: 18px;
+  line-height: 1;
+}
+
+/* FLOW SECTION */
+.flow-section {
+  margin: 60px 0 50px;
+  position: relative;
+}
+.flow-title {
+  font-family: 'Caveat', cursive;
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 6px;
+  border-bottom: 2px dashed #aaa;
+  padding-bottom: 8px;
+}
+.flow-sub {
+  font-family: 'Patrick Hand', cursive;
+  font-size: 14px;
+  color: #777;
+  margin-bottom: 28px;
+}
+.flow-row {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  flex-wrap: wrap;
+  row-gap: 14px;
+}
+.flow-node {
+  border: 2.5px solid #1a1a1a;
+  border-radius: 8px 10px 8px 9px;
+  padding: 12px 14px;
+  text-align: center;
+  background: white;
+  box-shadow: 3px 3px 0 #1a1a1a;
+  min-width: 100px;
+}
+.flow-node.aws-n { background: #fff8e1; border-color: #1a1a1a; }
+.flow-node .fn-icon { font-size: 22px; margin-bottom: 4px; }
+.flow-node .fn-label { font-family: 'Kalam', cursive; font-size: 11px; font-weight: 700; }
+.flow-node .fn-tech {
+  font-family: 'Patrick Hand', cursive;
+  font-size: 9px;
+  color: #888;
+  margin-top: 2px;
+  font-style: italic;
+}
+.flow-arr {
+  font-family: 'Caveat', cursive;
+  font-size: 22px;
+  padding: 0 6px;
+  color: #555;
+  flex-shrink: 0;
+}
+
+/* OFFLINE FLOW */
+.offline-flow {
+  margin-top: 20px;
+  padding: 14px 18px;
+  border: 2px dashed #888;
+  border-radius: 8px;
+  background: #f9f9f9;
+}
+.offline-title {
+  font-family: 'Caveat', cursive;
+  font-size: 16px;
+  color: #555;
+  margin-bottom: 12px;
+}
+
+/* ARCH SECTION */
+.arch-section {
+  margin: 50px 0;
+}
+.arch-title {
+  font-family: 'Caveat', cursive;
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 6px;
+  border-bottom: 2px dashed #aaa;
+  padding-bottom: 8px;
+}
+.arch-sub {
+  font-family: 'Patrick Hand', cursive;
+  font-size: 14px;
+  color: #777;
+  margin-bottom: 28px;
+}
+.layer {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  border: 2.5px solid #1a1a1a;
+  border-radius: 10px 12px 10px 11px;
+  padding: 16px 20px;
+  margin-bottom: 14px;
+  background: white;
+  box-shadow: 4px 4px 0 #1a1a1a;
+  position: relative;
+}
+.layer.l2 { background: #fffbf0; }
+.layer.l3 { background: #f0f5ff; }
+.layer-num {
+  font-family: 'Caveat', cursive;
+  font-size: 32px;
+  font-weight: 700;
+  color: #ccc;
+  flex-shrink: 0;
+  width: 40px;
+}
+.layer-icon { font-size: 28px; flex-shrink: 0; }
+.layer-info { flex: 1; }
+.layer-title { font-family: 'Kalam', cursive; font-size: 15px; font-weight: 700; margin-bottom: 4px; }
+.layer-desc { font-family: 'Patrick Hand', cursive; font-size: 12px; color: #555; line-height: 1.5; }
+.layer-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-left: auto; max-width: 300px; }
+.ltag {
+  border: 1.5px solid #333;
+  border-radius: 20px;
+  padding: 3px 10px;
+  font-family: 'Patrick Hand', cursive;
+  font-size: 11px;
+  background: white;
+  white-space: nowrap;
+}
+.ltag.green { background: #e8f5e0; border-color: #27ae60; color: #1a6b2a; }
+.ltag.amber { background: #fff8e1; border-color: #f39c12; color: #7a4f00; }
+.ltag.blue { background: #e8f0ff; border-color: #3498db; color: #1a3a6b; }
+
+/* HAND-WRITTEN SIDE NOTES */
+.side-note {
+  font-family: 'Caveat', cursive;
+  font-size: 13px;
+  color: #999;
+  padding: 6px 0;
+  border-left: 3px solid #ddd;
+  padding-left: 12px;
+  margin: 16px 0;
+  transform: rotate(-0.3deg);
+}
+.side-note.important {
+  border-left-color: #e74c3c;
+  color: #e74c3c;
+}
+.side-note.blue { border-left-color: #3498db; color: #3498db; }
+
+/* COST TABLE */
+.cost-section { margin: 40px 0; }
+.cost-title {
+  font-family: 'Caveat', cursive;
+  font-size: 24px;
+  font-weight: 700;
+  margin-bottom: 16px;
+}
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: 'Patrick Hand', cursive;
+  font-size: 13px;
+}
+th {
+  border: 2px solid #1a1a1a;
+  padding: 8px 12px;
+  background: #1a1a1a;
+  color: white;
+  font-family: 'Kalam', cursive;
+  font-size: 13px;
+  text-align: left;
+}
+td {
+  border: 1.5px solid #888;
+  padding: 7px 12px;
+  background: white;
+}
+tr:nth-child(even) td { background: #f9f7f2; }
+.td-total td { font-weight: 700; background: #f5f0e8; font-family: 'Kalam', cursive; }
+
+/* STICKY NOTE */
+.sticky {
+  background: #fffacd;
+  border: 1px solid #e8d44d;
+  padding: 16px 18px;
+  transform: rotate(1.2deg);
+  box-shadow: 3px 4px 8px rgba(0,0,0,0.12);
+  font-family: 'Caveat', cursive;
+  font-size: 15px;
+  line-height: 1.6;
+  max-width: 280px;
+  position: relative;
+}
+.sticky::before {
+  content: '';
+  width: 20px; height: 20px;
+  background: #e8c900;
+  position: absolute;
+  top: -6px; left: 50%;
+  transform: translateX(-50%) rotate(45deg);
+  box-shadow: 1px -1px 3px rgba(0,0,0,0.1);
+}
+.sticky-row {
+  display: flex;
+  gap: 30px;
+  margin: 30px 0;
+  align-items: flex-start;
+}
+.sticky.rotate-neg { transform: rotate(-1.5deg); background: #e8f8e8; border-color: #7bc47b; }
+.sticky.rotate-neu { transform: rotate(0.4deg); background: #ffe8e8; border-color: #e87b7b; }
+.sticky-title { font-weight: 700; font-size: 17px; margin-bottom: 6px; text-decoration: underline; }
+
+/* DIVIDER */
+.divider {
+  border: none;
+  border-top: 2px dashed #ccc;
+  margin: 50px 0;
+}
+
+/* FOOTER */
+.footer {
+  text-align: center;
+  padding: 30px 0 10px;
+  font-family: 'Caveat', cursive;
+  font-size: 16px;
+  color: #aaa;
+  border-top: 2px solid #ddd;
+}
+.footer span { color: #e74c3c; }
+
+/* PAGE NUMBER style */
+.pg { font-family: 'Patrick Hand', cursive; font-size: 12px; color: #bbb; }
+
+/* Crossed out text */
+.crossed { text-decoration: line-through; color: #e74c3c; }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="page-top">
+  <div class="hand-note-top">
+    NeuralJugaad — AI for Bharat Hackathon<br>
+    Wireframe draft v2.1 — Feb 2026<br>
+    <span class="pg">Mandar Bhalerao</span>
+  </div>
+  <div class="page-title">BhashaVerse AI — <span>UI Wireframe</span></div>
+  <div class="page-meta">
+    <span>Mobile-first design</span>
+    <span>Offline + Online modes</span>
+    <span>5 screens</span>
+  </div>
+</div>
+
+<div class="side-note">screens below are roughly to scale for a 6" phone — not pixel perfect yet, will fix in Figma later</div>
+
+<!-- SCREENS ROW -->
+<div class="screens-wrapper">
+
+  <!-- SCREEN 1 -->
+  <div class="screen-block">
+    <div class="annotation" style="top:-28px; left:10px;">
+      Screen 1 — first thing user sees
+    </div>
+    <div class="phone">
+      <div class="notch"></div>
+      <div class="phone-inner">
+        <div class="sbar"><span>9:41</span><span>●●●● 100%</span></div>
+        <div style="padding:14px 12px; text-align:center;">
+          <div style="font-size:36px; margin-bottom:6px;">🌿</div>
+          <div style="font-family:'Caveat',cursive; font-size:22px; font-weight:700; margin-bottom:2px;">BhashaVerse</div>
+          <div style="font-family:'Patrick Hand',cursive; font-size:12px; color:#888; margin-bottom:16px;">भाषावर्स AI</div>
+          <div style="font-family:'Patrick Hand',cursive; font-size:10px; color:#555; margin-bottom:10px; text-transform:uppercase; letter-spacing:.05em;">अपनी भाषा चुनें</div>
+          <div class="lang-g">
+            <div class="lang-pill active"><span class="lang-main">हिंदी</span>Hindi</div>
+            <div class="lang-pill"><span class="lang-main">मराठी</span>Marathi</div>
+            <div class="lang-pill"><span class="lang-main">தமிழ்</span>Tamil</div>
+            <div class="lang-pill"><span class="lang-main">తెలుగు</span>Telugu</div>
+          </div>
+          <div class="lang-g" style="margin-top:0">
+            <div class="lang-pill"><span class="lang-main">ਪੰਜਾਬੀ</span>Punjabi</div>
+            <div class="lang-pill" style="border:1.5px dashed #ccc; color:#bbb;"><span class="lang-main" style="color:#ccc;">+18</span>more</div>
+          </div>
+          <div class="btn-sketch btn-dark" style="margin-top:12px;">आगे बढ़ें →</div>
+        </div>
+      </div>
+    </div>
+    <div class="s-label-wrap">
+      <div class="s-label">Language Select</div>
+      <div class="s-label-sub">First-run only</div>
+    </div>
+    <div class="annotation" style="bottom:-22px; right:-20px; color:#3498db;">
+      <span class="ann-arrow">↑</span>
+      22 langs via Bhashini
+    </div>
+  </div>
+
+  <!-- SCREEN 2 -->
+  <div class="screen-block">
+    <div class="annotation" style="top:-28px; left:10px; color:#27ae60;">
+      Screen 2 — main home
+    </div>
+    <div class="phone">
+      <div class="notch"></div>
+      <div class="phone-inner">
+        <div class="sbar"><span>9:41</span><span>📵 offline</span></div>
+        <div class="s-hdr">
+          <div class="s-hdr-title">नमस्ते, रामू जी 🙏</div>
+          <div class="s-hdr-sub">आज क्या पूछना है?</div>
+        </div>
+        <div style="background:#1a1a1a; padding:18px 12px; text-align:center;">
+          <div style="font-family:'Patrick Hand',cursive; font-size:10px; color:rgba(255,255,255,0.5); margin-bottom:4px;">बोलने के लिए दबाएं</div>
+          <div class="mic-btn">🎤</div>
+          <div style="font-family:'Patrick Hand',cursive; font-size:8px; color:rgba(255,255,255,0.3); margin-top:6px;">TAP AND HOLD TO SPEAK</div>
+        </div>
+        <div class="s-body" style="padding:8px;">
+          <div class="feat-g">
+            <div class="feat-c">
+              <div class="feat-icon">🌾</div>
+              <div class="feat-t">फसल देखभाल</div>
+              <div class="feat-s">Crop Care</div>
+              <div class="offline-t">📵 offline</div>
+            </div>
+            <div class="feat-c">
+              <div class="feat-icon">📊</div>
+              <div class="feat-t">मंडी भाव</div>
+              <div class="feat-s">Market Prices</div>
+              <div class="offline-t">🌐 online</div>
+            </div>
+            <div class="feat-c">
+              <div class="feat-icon">🏥</div>
+              <div class="feat-t">स्वास्थ्य</div>
+              <div class="feat-s">Health</div>
+              <div class="offline-t">📵 offline</div>
+            </div>
+            <div class="feat-c">
+              <div class="feat-icon">🏛️</div>
+              <div class="feat-t">सरकारी योजना</div>
+              <div class="feat-s">Gov Schemes</div>
+              <div class="offline-t">📵 offline</div>
+            </div>
+          </div>
+        </div>
+        <div class="nav-b">
+          <div class="nav-i act"><div class="ni">🏠</div><div class="nl">Home</div><div class="nav-dot"></div></div>
+          <div class="nav-i"><div class="ni">🌿</div><div class="nl">Crop</div></div>
+          <div class="nav-i"><div class="ni">💬</div><div class="nl">Chat</div></div>
+          <div class="nav-i"><div class="ni">📊</div><div class="nl">Market</div></div>
+        </div>
+      </div>
+    </div>
+    <div class="s-label-wrap">
+      <div class="s-label">Home Screen</div>
+      <div class="s-label-sub">Voice-first design</div>
+    </div>
+    <div class="annotation" style="top:170px; right:-80px; width:75px; text-align:left; color:#e74c3c;">
+      <span class="ann-arrow">←</span>
+      big button = primary CTA
+    </div>
+  </div>
+
+  <!-- SCREEN 3 -->
+  <div class="screen-block">
+    <div class="annotation" style="top:-28px; left:10px;">
+      Screen 3 — after speaking
+    </div>
+    <div class="phone">
+      <div class="notch"></div>
+      <div class="phone-inner">
+        <div class="sbar"><span>9:41</span><span>●●●●</span></div>
+        <div class="s-hdr">
+          <div class="s-hdr-title">💬 AI सहायक</div>
+          <div class="s-hdr-sub">Amazon Bedrock powered</div>
+        </div>
+        <div class="s-body">
+          <div class="bubble-u">
+            "गेहूं में पीले धब्बे आ रहे हैं, क्या करूं?"
+          </div>
+          <div class="bubble-ai">
+            <div class="ai-by">🤖 BhashaVerse AI — via Bedrock</div>
+            Yellow Rust हो सकती है। Propiconazole 25% EC — 1ml/litre पानी में मिलाकर छिड़काव करें।
+          </div>
+          <div class="audio-b">
+            <div class="audio-icon">▶</div>
+            <div class="wave-s">
+              <div class="w" style="height:6px"></div>
+              <div class="w" style="height:12px"></div>
+              <div class="w" style="height:8px"></div>
+              <div class="w" style="height:16px"></div>
+              <div class="w" style="height:10px"></div>
+              <div class="w" style="height:14px"></div>
+              <div class="w" style="height:7px"></div>
+              <div class="w" style="height:11px"></div>
+              <div class="w" style="height:9px"></div>
+            </div>
+            <div class="audio-lbl">Polly TTS</div>
+          </div>
+          <div style="font-family:'Patrick Hand',cursive; font-size:8px; color:#aaa; margin: 3px 0 6px; text-align:right;">Hindi — Aditi voice</div>
+          <div class="bubble-u" style="background:#333;">
+            "और कौन सी दवा काम करेगी?"
+          </div>
+          <div class="inp-bar">
+            <span style="font-size:14px;">🎤</span>
+            <span class="inp-ph">बोलें या टाइप करें...</span>
+            <span style="font-size:14px;">⬆</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="s-label-wrap">
+      <div class="s-label">AI Chat</div>
+      <div class="s-label-sub">Voice response + text</div>
+    </div>
+    <div class="annotation" style="bottom:-20px; left:-10px; color:#27ae60;">
+      <span class="ann-arrow">↑</span>
+      plays audio auto
+    </div>
+  </div>
+
+  <!-- SCREEN 4 -->
+  <div class="screen-block">
+    <div class="annotation" style="top:-28px; left:10px; color:#e74c3c;">
+      Screen 4 — photo mode
+    </div>
+    <div class="phone">
+      <div class="notch"></div>
+      <div class="phone-inner">
+        <div class="sbar"><span>9:41</span><span>📵 NO INTERNET</span></div>
+        <div class="s-hdr">
+          <div class="s-hdr-title">🌿 फसल रोग</div>
+          <div class="s-hdr-sub">Works offline — TFLite model</div>
+        </div>
+        <div class="cam-box">
+          <div class="cam-frame">📷</div>
+          <div class="cam-lbl">पत्ती की फोटो लें / tap to capture</div>
+        </div>
+        <div class="s-body" style="padding:8px;">
+          <div class="result-b">
+            <div style="font-size:9px; font-family:'Patrick Hand',cursive; color:#888; margin-bottom:3px;">⚠️ Disease detected</div>
+            <div class="disease-n">Yellow Rust — पीली धारी रोग</div>
+            <div class="conf-row">
+              <div class="conf-tr"><div class="conf-fill" style="width:87%"></div></div>
+              <div class="conf-pct">87%</div>
+            </div>
+            <div class="remedy-b">
+              <strong>Remedy:</strong> Propiconazole 25% EC<br>
+              1ml per litre — spray every 10 days
+            </div>
+          </div>
+          <div style="text-align:center; margin-top:4px;">
+            <span style="font-family:'Patrick Hand',cursive; font-size:9px; background:#1a1a1a; color:white; border-radius:10px; padding:2px 10px;">📵 No internet used</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="s-label-wrap">
+      <div class="s-label">Crop Disease</div>
+      <div class="s-label-sub">100% offline TFLite</div>
+    </div>
+    <div class="annotation" style="top:220px; right:-90px; width:85px; color:#e74c3c;">
+      <span class="ann-arrow">←</span>
+      PlantVillage pre-trained model
+    </div>
+  </div>
+
+  <!-- SCREEN 5 -->
+  <div class="screen-block">
+    <div class="annotation" style="top:-28px; left:10px; color:#3498db;">
+      Screen 5 — market
+    </div>
+    <div class="phone">
+      <div class="notch"></div>
+      <div class="phone-inner">
+        <div class="sbar"><span>9:41</span><span>●●●●</span></div>
+        <div class="s-hdr">
+          <div class="s-hdr-title">📊 मंडी भाव</div>
+          <div class="s-hdr-sub">Agmarknet API — live prices</div>
+        </div>
+        <div class="s-body" style="padding:8px 10px;">
+          <div style="font-family:'Patrick Hand',cursive; font-size:9px; color:#888; margin-bottom:8px; display:flex; justify-content:space-between;">
+            <span>📍 Nashik Mandi</span>
+            <span>Updated 6:30 AM</span>
+          </div>
+          <div class="mandi-row">
+            <div class="m-icon">🌾</div>
+            <div class="m-name">Wheat <span>गेहूं</span></div>
+            <div style="text-align:right">
+              <div class="m-price">₹2,240</div>
+              <div class="m-change up">▲ +₹60</div>
+            </div>
+          </div>
+          <div class="mandi-row">
+            <div class="m-icon">🌽</div>
+            <div class="m-name">Maize <span>मक्का</span></div>
+            <div style="text-align:right">
+              <div class="m-price">₹1,780</div>
+              <div class="m-change dn">▼ -₹30</div>
+            </div>
+          </div>
+          <div class="mandi-row">
+            <div class="m-icon">🧅</div>
+            <div class="m-name">Onion <span>प्याज</span></div>
+            <div style="text-align:right">
+              <div class="m-price">₹980</div>
+              <div class="m-change up">▲ +₹120</div>
+            </div>
+          </div>
+          <div class="mandi-row">
+            <div class="m-icon">🌱</div>
+            <div class="m-name">Soybean <span>सोयाबीन</span></div>
+            <div style="text-align:right">
+              <div class="m-price">₹4,450</div>
+              <div class="m-change up">▲ +₹85</div>
+            </div>
+          </div>
+          <div style="margin-top:8px;">
+            <div class="btn-sketch" style="font-size:10px; padding:5px 8px;">🎤 पूछें — कौन सी मंडी सबसे अच्छी?</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="s-label-wrap">
+      <div class="s-label">Market Prices</div>
+      <div class="s-label-sub">Live — needs internet</div>
+    </div>
+  </div>
+
+</div>
+
+<hr class="divider">
+
+<!-- STICKY NOTES ROW -->
+<div class="sticky-row">
+  <div class="sticky">
+    <div class="sticky-title">Key Design Choices</div>
+    — voice is primary, text is secondary<br>
+    — big tap targets (low-literacy users)<br>
+    — Hindi/regional text on every screen<br>
+    — offline badge always visible<br>
+    — <span class="crossed">no small icons</span>
+  </div>
+  <div class="sticky rotate-neg">
+    <div class="sticky-title">AWS Services Used</div>
+    ✓ Bedrock (Titan Text)<br>
+    ✓ Lambda (backend)<br>
+    ✓ Polly (TTS Hindi)<br>
+    ✓ S3 (knowledge base)<br>
+    ✗ <span class="crossed">SageMaker</span> — too $$
+  </div>
+  <div class="sticky rotate-neu">
+    <div class="sticky-title">TODO before demo</div>
+    — test Bhashini API latency<br>
+    — crop model accuracy check<br>
+    — offline fallback for mandi<br>
+    — <span class="crossed">add Kannada support</span> (v2)<br>
+    — record demo video
+  </div>
+</div>
+
+<hr class="divider">
+
+<!-- FLOW SECTION -->
+<div class="flow-section">
+  <div class="flow-title">User Flow — Voice Query (Online)</div>
+  <div class="flow-sub">what happens step by step when a farmer asks a question with internet available</div>
+  <div class="flow-row">
+    <div class="flow-node"><div class="fn-icon">🎤</div><div class="fn-label">User Speaks</div><div class="fn-tech">Hindi/Regional</div></div>
+    <div class="flow-arr">→</div>
+    <div class="flow-node"><div class="fn-icon">📱</div><div class="fn-label">On-device STT</div><div class="fn-tech">Whisper tiny</div></div>
+    <div class="flow-arr">→</div>
+    <div class="flow-node"><div class="fn-icon">🌐</div><div class="fn-label">Bhashini API</div><div class="fn-tech">translate → EN</div></div>
+    <div class="flow-arr">→</div>
+    <div class="flow-node aws-n"><div class="fn-icon">⚡</div><div class="fn-label">AWS Lambda</div><div class="fn-tech">route + auth</div></div>
+    <div class="flow-arr">→</div>
+    <div class="flow-node aws-n"><div class="fn-icon">🤖</div><div class="fn-label">Bedrock AI</div><div class="fn-tech">Titan Text</div></div>
+    <div class="flow-arr">→</div>
+    <div class="flow-node aws-n"><div class="fn-icon">🔊</div><div class="fn-label">Amazon Polly</div><div class="fn-tech">Hindi TTS</div></div>
+    <div class="flow-arr">→</div>
+    <div class="flow-node"><div class="fn-icon">👂</div><div class="fn-label">User Hears</div><div class="fn-tech">local language</div></div>
+  </div>
+
+  <div class="side-note blue" style="margin-top:14px;">yellow nodes = AWS services (uses credits). rest is free / on-device</div>
+
+  <div class="offline-flow">
+    <div class="offline-title">📵 Offline Path (no internet)</div>
+    <div class="flow-row">
+      <div class="flow-node"><div class="fn-icon">🎤</div><div class="fn-label">User Speaks</div><div class="fn-tech">any language</div></div>
+      <div class="flow-arr">→</div>
+      <div class="flow-node"><div class="fn-icon">📱</div><div class="fn-label">On-device STT</div><div class="fn-tech">whisper.cpp</div></div>
+      <div class="flow-arr">→</div>
+      <div class="flow-node"><div class="fn-icon">🔍</div><div class="fn-label">Keyword Search</div><div class="fn-tech">local JSON</div></div>
+      <div class="flow-arr">→</div>
+      <div class="flow-node"><div class="fn-icon">📚</div><div class="fn-label">Local KB</div><div class="fn-tech">pre-cached data</div></div>
+      <div class="flow-arr">→</div>
+      <div class="flow-node"><div class="fn-icon">🔊</div><div class="fn-label">Expo Speech</div><div class="fn-tech">on-device TTS</div></div>
+      <div class="flow-arr">→</div>
+      <div class="flow-node"><div class="fn-icon">👂</div><div class="fn-label">User Hears</div><div class="fn-tech">0 AWS calls</div></div>
+    </div>
+  </div>
+</div>
+
+<hr class="divider">
+
+<!-- ARCHITECTURE -->
+<div class="arch-section">
+  <div class="arch-title">System Architecture — 3 Layers</div>
+  <div class="arch-sub">designed to minimize AWS credit usage while maximizing offline functionality</div>
+
+  <div class="layer">
+    <div class="layer-num">01</div>
+    <div class="layer-icon">📱</div>
+    <div class="layer-info">
+      <div class="layer-title">Edge Layer — Phone (Always Works)</div>
+      <div class="layer-desc">Everything offline runs here. TFLite crop model (~8MB), pre-cached JSON with 500+ farming tips + govt schemes + health info. Whisper tiny for speech recognition. No internet needed.</div>
+    </div>
+    <div class="layer-tags">
+      <div class="ltag green">React Native (Expo)</div>
+      <div class="ltag green">TFLite Model</div>
+      <div class="ltag green">Offline JSON DB</div>
+      <div class="ltag green">Whisper.cpp</div>
+    </div>
+  </div>
+
+  <div class="side-note">arrow: phone talks to lambda only when internet is available</div>
+
+  <div class="layer l2">
+    <div class="layer-num">02</div>
+    <div class="layer-icon">⚡</div>
+    <div class="layer-info">
+      <div class="layer-title">Serverless Backend — AWS Lambda</div>
+      <div class="layer-desc">Python functions handle routing. Zero cost when idle (1M free requests/month). Calls Bhashini API for translation, Agmarknet for mandi prices, and Bedrock for AI responses.</div>
+    </div>
+    <div class="layer-tags">
+      <div class="ltag amber">AWS Lambda</div>
+      <div class="ltag amber">API Gateway</div>
+      <div class="ltag amber">Bhashini (free)</div>
+    </div>
+  </div>
+
+  <div class="layer l3">
+    <div class="layer-num">03</div>
+    <div class="layer-icon">☁️</div>
+    <div class="layer-info">
+      <div class="layer-title">AI Cloud — AWS Bedrock + Polly + S3</div>
+      <div class="layer-desc">Bedrock runs Titan Text Express for AI answers ($0.0008/1K tokens). Polly converts text to natural Hindi speech (Aditi voice). S3 stores knowledge base docs for RAG queries.</div>
+    </div>
+    <div class="layer-tags">
+      <div class="ltag blue">Amazon Bedrock</div>
+      <div class="ltag blue">Amazon Polly</div>
+      <div class="ltag blue">Amazon S3</div>
+    </div>
+  </div>
+
+  <div class="side-note important">NOT using SageMaker — too expensive, would burn $100 in 2 days with idle endpoint costs</div>
+</div>
+
+<hr class="divider">
+
+<!-- COST TABLE -->
+<div class="cost-section">
+  <div class="cost-title">AWS Credit Budget ($100)</div>
+  <table>
+    <thead>
+      <tr><th>Service</th><th>Usage (prototype)</th><th>Est. Cost</th><th>Notes</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Amazon Bedrock (Titan Text)</td><td>~10,000 test queries</td><td>~$8</td><td>$0.0008/1K tokens</td></tr>
+      <tr><td>Amazon Polly (Hindi TTS)</td><td>~5 hrs of audio</td><td>~$5</td><td>Aditi voice, neural</td></tr>
+      <tr><td>AWS Lambda</td><td>~50,000 calls</td><td>$0</td><td>Free tier (1M/month)</td></tr>
+      <tr><td>Amazon S3</td><td>KB files + audio</td><td>~$1</td><td>5GB free tier</td></tr>
+      <tr><td>API Gateway</td><td>~50,000 calls</td><td>~$0.18</td><td>$3.50/million</td></tr>
+      <tr class="td-total"><td>TOTAL</td><td></td><td>~$15–20</td><td>$80 buffer for mistakes</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+  BhashaVerse AI — NeuralJugaad — <span>AI for Bharat Hackathon 2026</span><br>
+  <span style="font-size:13px; color:#ccc;">wireframe draft — not final design — will iterate based on user feedback</span>
+</div>
+
+</body>
+</html>
